@@ -14,10 +14,6 @@ namespace Data.Entities
         [Display(Name = "Назва")]
         public string Name { get; set; }
 
-        [Required(ErrorMessage = "Будь ласка, введіть виробника")]
-        [Display(Name = "Виробник")]
-        public string Brand { get; set; }
-
         [DataType(DataType.MultilineText)]
         [Required(ErrorMessage = "Будь ласка, введіть опис")]
 

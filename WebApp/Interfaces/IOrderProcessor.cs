@@ -1,6 +1,6 @@
 ﻿using Data.Model;
 
-namespace Data.Interfaces;
+namespace WebApp.Interfaces;
 
 public interface IOrderProcessor
 {

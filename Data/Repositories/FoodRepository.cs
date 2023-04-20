@@ -10,7 +10,6 @@ namespace Data.Repositories
         {
             new()
             {
-                Brand = "Brand",
                 Category = "Category1",
                 Description = "Description",
                 Id = Guid.NewGuid(),
@@ -19,7 +18,6 @@ namespace Data.Repositories
             },
             new()
             {
-                Brand = "Brand",
                 Category = "Category2",
                 Description = "Description",
                 Id = Guid.NewGuid(),
@@ -28,7 +26,6 @@ namespace Data.Repositories
             },
             new()
             {
-                Brand = "Brand",
                 Category = "Category1",
                 Description = "Description",
                 Id = Guid.NewGuid(),
@@ -37,7 +34,6 @@ namespace Data.Repositories
             },
             new()
             {
-                Brand = "Brand",
                 Category = "Category2",
                 Description = "Description",
                 Id = Guid.NewGuid(),
@@ -46,7 +42,6 @@ namespace Data.Repositories
             },
             new()
             {
-                Brand = "Brand",
                 Category = "Category3",
                 Description = "Description",
                 Id = Guid.NewGuid(),
