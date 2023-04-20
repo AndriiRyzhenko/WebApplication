@@ -1,0 +1,45 @@
+﻿@model Data.Model.ShippingDetails
+
+@{
+    ViewBag.Title = "Замовлення їду додому";
+}
+
+<h2>Оформити замовлення</h2>
+<p>Будь ласка, введіть Ваші контактні дані.</p>
+
+@using (Html.BeginForm())
+{
+    
+    @Html.ValidationSummary()
+    <h3>Одержувач</h3>
+    <div class="form-group">
+        <label>Ім'я:</label>
+        @Html.TextBoxFor(x => x.FirstName, new { @class = "form-control" })
+    </div>
+    <div class="form-group">
+        <label>Прізвище:</label>
+        @Html.TextBoxFor(x => x.SecondName, new { @class = "form-control" })
+    </div>
+    <div class="form-group">
+        <label>E-mail:</label>
+        @Html.TextBoxFor(x => x.Email, new { @class = "form-control" })
+    </div>
+    <h3>Адреса доставки</h3>
+    foreach (var property in ViewData.ModelMetadata.Properties)
+    {
+        if (property.PropertyName != "FirstName" && property.PropertyName != "SecondName" && property.PropertyName != "Email")
+        {
+            <div class="form-group">
+                <label>
+                    @(property.DisplayName ?? property.PropertyName)
+                </label>
+                @Html.TextBox(property.PropertyName, null, new { @class = "form-control" })
+            </div>
+        }
+    }
+
+    <div class="text-center">
+        <input class="btn btn-primary" type="submit" value="Обробити замовлення" />
+    </div>
+
+}

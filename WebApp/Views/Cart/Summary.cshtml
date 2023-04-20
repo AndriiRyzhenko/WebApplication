@@ -1,0 +1,13 @@
+﻿@model Data.Model.Cart
+
+<div class="navbar-right">
+    @Html.ActionLink("Замовити", "Index", "Cart",
+    new { returnUrl = Context.Request.Path },
+        new { @class = "btn btn-default navbar-btn" })
+</div>
+
+<div class="navbar-text navbar-right">
+    <b>Ваше замовлення</b>
+    @Model.Lines.Sum(x => x.Quantity) позицій,
+    @Model.ComputeTotalValue().ToString("#.## грн ")
+</div>

@@ -1,0 +1,30 @@
+﻿@model Data.Entities.Food
+
+<div class="well">
+    <div class="row">
+        <div class="col-xs-10">
+            <h3>
+                <strong>@Model.Name</strong>
+            </h3>
+            <h4>
+                <strong>@Model.Brand</strong>
+            </h4>
+        </div>
+        <div class="col-xs-2">
+            <h3>
+                <strong id="price" class="pull-right label label-primary">
+                    @Model.Price.ToString("#.## грн")
+                </strong>
+            </h3>
+            @using (Html.BeginForm("AddToCart", "Cart"))
+            {
+                <div class="pull-right">
+                    @Html.HiddenFor( x=> x.Id)
+                    @Html.Hidden("returnUrl", Context.Request.Path)
+                    <input type="submit" class="btn btn-success" value="Добивати у кошик" />
+                </div>
+            }
+        </div>
+    </div>
+    <span class="lead">@Model.Description</span>
+</div>

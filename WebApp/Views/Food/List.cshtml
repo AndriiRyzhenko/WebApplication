@@ -1,0 +1,15 @@
+﻿@using WebApp.HtmlHelper
+@model FoodListViewModel
+
+@{
+    ViewBag.Title = "Товар";
+}
+
+@foreach (var food in Model.Food)
+{
+    @await Html.PartialAsync("_FoodSummary", food)
+}
+
+<div class="btn-group pull-right">
+    @Html.PageLinks(Model.PagingInfo, x => Url.Action("List", new { page = x, category = Model.CurrentCategory }))
+</div>
