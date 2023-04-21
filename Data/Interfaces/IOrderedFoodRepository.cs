@@ -6,5 +6,5 @@ public interface IOrderedFoodRepository
 {
     IEnumerable<OrderedFood> GetOrderedFood { get; }
     OrderedFood Get(Guid orderedFoodId);
-    void Save(OrderedFood orderedFood);
+    void Add(OrderedFood orderedFood);
 }

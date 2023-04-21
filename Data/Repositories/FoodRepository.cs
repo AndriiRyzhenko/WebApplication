@@ -16,28 +16,14 @@ public class FoodRepository : IFoodRepository
 
     public Food Get(Guid foodId) => _dbContext.Foods.Find(foodId);
 
-    public void Save(Food food)
+    public void Add(Food food)
     {
         if (food.Id == Guid.Empty)
         {
             food.Id = Guid.NewGuid();
-            _dbContext.Foods.Add(food);
         }
-        else
-        {
-            var existingFood = _dbContext.Foods.Find(food.Id);
-            if (existingFood != null)
-            {
-                existingFood.Name = food.Name;
-                existingFood.Description = food.Description;
-                existingFood.Category = food.Category;
-                existingFood.Price = food.Price;
-            }
-            else
-            {
-                _dbContext.Foods.Add(food);
-            }
-        }
+        _dbContext.Foods.Add(food);
+
         _dbContext.SaveChanges();
     }
 

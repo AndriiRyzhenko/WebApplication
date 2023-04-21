@@ -91,7 +91,7 @@ public class CartController : Controller
 
             order.OrderedFood = orderedFood.ToArray();
 
-            _orderRepository.Save(order);
+            _orderRepository.Add(order);
 
             cart.Clear();
             HttpContext.Session.SetObject(cartSessionKey, cart);

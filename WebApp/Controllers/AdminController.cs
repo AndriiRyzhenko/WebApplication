@@ -48,7 +48,7 @@ public class AdminController : Controller
     {
         if (ModelState.IsValid)
         {
-            _foodRepository.Save(food);
+            _foodRepository.Add(food);
             TempData["message"] = string.Format($"Товар \"{food.Name}\" збережено");
             return RedirectToAction("FoodList");
         }

@@ -21,17 +21,15 @@ namespace Data.Repositories
             return _dbContext.OrderedFoods.Include(of => of.Food).FirstOrDefault(o => o.Id == orderedFoodId);
         }
 
-        public void Save(OrderedFood orderedFood)
+        public void Add(OrderedFood orderedFood)
         {
             if (orderedFood.Id == Guid.Empty)
             {
                 orderedFood.Id = Guid.NewGuid();
                 _dbContext.OrderedFoods.Add(orderedFood);
             }
-            else
-            {
-                _dbContext.OrderedFoods.Update(orderedFood);
-            }
+            _dbContext.OrderedFoods.Add(orderedFood);
+
             _dbContext.SaveChanges();
         }
     }

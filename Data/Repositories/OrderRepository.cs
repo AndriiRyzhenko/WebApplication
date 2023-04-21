@@ -20,17 +20,14 @@ public class OrderRepository : IOrderRepository
         return _dbContext.Orders.FirstOrDefault(o => o.Id == orderId);
     }
 
-    public void Save(Order order)
+    public void Add(Order order)
     {
         if (order.Id == Guid.Empty)
         {
             order.Id = Guid.NewGuid();
-            _dbContext.Orders.Add(order);
         }
-        else
-        {
-            _dbContext.Orders.Update(order);
-        }
+
+        _dbContext.Orders.Add(order);
         _dbContext.SaveChanges();
     }
 }

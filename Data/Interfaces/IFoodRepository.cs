@@ -5,7 +5,7 @@ public interface IFoodRepository
 {
     IEnumerable<Food> GetFood { get; }
     Food Get(Guid foodId);
-    void Save(Food food);
+    void Add(Food food);
     Food Update(Food food);
     void Delete(Guid foodId);
 }
