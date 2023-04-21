@@ -6,20 +6,36 @@ namespace WebApp.Controllers;
 
 public class AdminController : Controller
 {
-    IFoodRepository repository;
-    public AdminController(IFoodRepository repository)
+    IFoodRepository _foodRepository;
+    private readonly IOrderRepository _orderRepository;
+    private readonly IOrderedFoodRepository _orderedFoodRepository;
+
+    public AdminController(IFoodRepository foodRepository, IOrderRepository orderRepository, IOrderedFoodRepository orderedFoodRepository)
     {
-        this.repository = repository;
+        _foodRepository = foodRepository;
+        _orderRepository = orderRepository;
+        _orderedFoodRepository = orderedFoodRepository;
     }
 
     public ViewResult Index()
     {
-        return View(repository.GetFood);
+        return View();
     }
 
     public ViewResult FoodList()
     {
-        return View(repository.GetFood);
+        return View(_foodRepository.GetFood);
+    }
+
+    public ViewResult OrderList()
+    {
+        return View(_orderRepository.GetOrders);
+    }
+
+    public ViewResult OrderedFoodList(Guid id)
+    {
+        var orderedFood = _orderedFoodRepository.GetOrderedFood.Where(p => p.OrderId == id).ToList();
+        return View(orderedFood);
     }
 
     public ViewResult Add()
@@ -32,7 +48,7 @@ public class AdminController : Controller
     {
         if (ModelState.IsValid)
         {
-            repository.Save(food);
+            _foodRepository.Save(food);
             TempData["message"] = string.Format($"Товар \"{food.Name}\" збережено");
             return RedirectToAction("Index");
         }
@@ -44,7 +60,7 @@ public class AdminController : Controller
 
     public ViewResult Edit(Guid id)
     {
-        Food food = repository.GetFood.FirstOrDefault(p => p.Id == id);
+        Food food = _foodRepository.GetFood.FirstOrDefault(p => p.Id == id);
         return View(food);
     }
 
@@ -53,9 +69,9 @@ public class AdminController : Controller
     {
         if (ModelState.IsValid)
         {
-            repository.Update(food);
+            _foodRepository.Update(food);
             TempData["message"] = string.Format($"Зміни інформації про товар \"{food.Name}\" збережено");
-            return RedirectToAction("Index");
+            return RedirectToAction("FoodList");
         }
         else
         {
@@ -66,7 +82,7 @@ public class AdminController : Controller
     [HttpPost]
     public ActionResult Delete(Food food)
     {
-        repository.Delete(food.Id);
+        _foodRepository.Delete(food.Id);
         return RedirectToAction("Index");
     }
 }

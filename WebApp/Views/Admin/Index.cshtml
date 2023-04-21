@@ -1,6 +1,4 @@
-﻿@model IEnumerable<Data.Entities.Food>
-
-@{
+﻿@{
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_AdminLayout.cshtml";
 }
@@ -17,7 +15,7 @@
                 <input type="submit" class="btn btn-primary" value="Список їжі" />
             </div>
         }
-        @using (Html.BeginForm("AddToCart", "Cart"))
+        @using (Html.BeginForm("OrderList", "Admin"))
         {
             <div class="pull-left">
                 <input type="submit" class="btn btn-primary" value="Список заказів" />

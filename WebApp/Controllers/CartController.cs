@@ -1,8 +1,8 @@
 ﻿using Data.Entities;
 using Data.Interfaces;
-using Data.Model;
 using Microsoft.AspNetCore.Mvc;
 using WebApp.Models;
+using ShippingDetails = WebApp.Models.ShippingDetails;
 
 namespace WebApp.Controllers;
 public class CartController : Controller
@@ -67,26 +67,24 @@ public class CartController : Controller
     {
         if (cart.Lines.Count() == 0)
         {
-            ModelState.AddModelError("", "Извините, корзина пуста!");
+            ModelState.AddModelError("", "Вибачте, кошик порожній!");
         }
         if (ModelState.IsValid)
         {
             var order = new Order
             {
                 Address = shippingDetails.Address,
-                City = shippingDetails.City,
-                Country = shippingDetails.Country,
                 Email = shippingDetails.Email,
                 FirstName = shippingDetails.FirstName,
                 SecondName = shippingDetails.SecondName,
+                Phone = shippingDetails.Phone,
+                TotalPrice = cart.Lines.Sum(l => l.Food.Price * l.Quantity)
             };
 
             var orderedFood = cart.Lines.Select(x => new OrderedFood
             {
                 Order = order,
-                //Food = x.Food,
                 FoodId = x.Food.Id,
-                //OrderId = order.Id,
                 Quantity = x.Quantity,
                 Id = Guid.NewGuid()
             });
@@ -95,7 +93,6 @@ public class CartController : Controller
 
             _orderRepository.Save(order);
 
-            //orderRepository.ProcessOrder(cart, shippingDetails);
             cart.Clear();
             HttpContext.Session.SetObject(cartSessionKey, cart);
             return View("Completed");

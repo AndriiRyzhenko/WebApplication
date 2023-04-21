@@ -3,8 +3,6 @@ using Data.Interfaces;
 using Data.Repositories;
 using Microsoft.EntityFrameworkCore;
 using WebApp.Infrastructure;
-using WebApp.Interfaces;
-using WebApp.Logic;
 
 namespace WebApp
 {
@@ -24,7 +22,6 @@ namespace WebApp
             builder.Services.AddScoped<IFoodRepository, FoodRepository>();
             builder.Services.AddScoped<IOrderRepository, OrderRepository>();
             builder.Services.AddScoped<IOrderedFoodRepository, OrderedFoodRepository>();
-            builder.Services.AddScoped<IOrderProcessor, OrderProcessor>();
 
             builder.Services.AddControllersWithViews(options =>
             {
@@ -33,7 +30,7 @@ namespace WebApp
 
             builder.Services.AddSession(options =>
             {
-                options.IdleTimeout = TimeSpan.FromSeconds(30);
+                options.IdleTimeout = TimeSpan.FromMinutes(15);
                 options.Cookie.HttpOnly = true;
                 options.Cookie.IsEssential = true;
             });
@@ -44,7 +41,6 @@ namespace WebApp
             if (!app.Environment.IsDevelopment())
             {
                 app.UseExceptionHandler("/Home/Error");
-                // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
                 app.UseHsts();
             }
 

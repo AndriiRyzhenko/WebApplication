@@ -1,6 +1,7 @@
 ﻿using Data.Entities;
 using Data.EntityFramework;
 using Data.Interfaces;
+using Microsoft.EntityFrameworkCore;
 
 namespace Data.Repositories
 {
@@ -13,11 +14,11 @@ namespace Data.Repositories
             _dbContext = dbContext;
         }
 
-        public IEnumerable<OrderedFood> GetOrderedFood => _dbContext.OrderedFoods.ToList();
+        public IEnumerable<OrderedFood> GetOrderedFood => _dbContext.OrderedFoods.Include(of => of.Food).ToList();
 
         public OrderedFood Get(Guid orderedFoodId)
         {
-            return _dbContext.OrderedFoods.FirstOrDefault(o => o.Id == orderedFoodId);
+            return _dbContext.OrderedFoods.Include(of => of.Food).FirstOrDefault(o => o.Id == orderedFoodId);
         }
 
         public void Save(OrderedFood orderedFood)

@@ -1,6 +1,4 @@
-﻿using Data.Model;
-
-namespace WebApp.Models;
+﻿namespace WebApp.Models;
 
 public class CartIndexViewModel
 {

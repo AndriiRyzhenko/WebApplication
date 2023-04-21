@@ -1,5 +1,5 @@
-﻿using Data.Model;
-using Microsoft.AspNetCore.Mvc.ModelBinding;
+﻿using Microsoft.AspNetCore.Mvc.ModelBinding;
+using WebApp.Models;
 
 namespace WebApp.Infrastructure;
 

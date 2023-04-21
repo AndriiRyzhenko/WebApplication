@@ -1,6 +1,6 @@
 ﻿using Data.Entities;
 
-namespace Data.Model;
+namespace WebApp.Models;
 
 public class Cart
 {
