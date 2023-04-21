@@ -11,10 +11,10 @@
     </div>
 
     <div class="panel-body">
-        @using (Html.BeginForm("Index", "Admin"))
+        @using (Html.BeginForm("Add", "Admin", FormMethod.Get))
         {
             <div class="pull-left navbar-btn">
-                <input type="submit" class="btn btn-primary" value="Назад до панелі адміна" />
+                <input type="submit" class="btn btn-primary" value="Додати" />
             </div>
         }
         <table class="table table-striped table-condensed table-bordered">
@@ -56,10 +56,6 @@
             }
 
         </table>
-    </div>
-
-    <div class="panel-footer">
-        @Html.ActionLink("Додати", "Add", null, new { @class = "btn btn-default" })
     </div>
 </div>
 

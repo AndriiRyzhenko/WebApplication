@@ -17,9 +17,9 @@ public class AdminController : Controller
         _orderedFoodRepository = orderedFoodRepository;
     }
 
-    public ViewResult Index()
+    public ActionResult Index()
     {
-        return View();
+        return RedirectToAction("FoodList");
     }
 
     public ViewResult FoodList()
@@ -50,7 +50,7 @@ public class AdminController : Controller
         {
             _foodRepository.Save(food);
             TempData["message"] = string.Format($"Товар \"{food.Name}\" збережено");
-            return RedirectToAction("Index");
+            return RedirectToAction("FoodList");
         }
         else
         {
@@ -83,7 +83,7 @@ public class AdminController : Controller
     public ActionResult Delete(Food food)
     {
         _foodRepository.Delete(food.Id);
-        return RedirectToAction("Index");
+        return RedirectToAction("FoodList");
     }
 }
 

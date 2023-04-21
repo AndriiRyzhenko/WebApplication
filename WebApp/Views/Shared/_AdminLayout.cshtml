@@ -16,12 +16,17 @@
     <title>@ViewBag.Title</title>
 </head>
 <body>
-<div>
-    @if(TempData["message"] != null)
-    {
-        <div class="alert alert-success">@TempData["message"]</div>
-    }
-    @RenderBody()
+<div class="navbar navbar-inverse" role="navigation">
+        <a class="navbar-brand" href="#">Панель адмінa</a>
+</div>
+<div class="row panel">
+    <div id="categories" class="col-xs-2">
+            @Html.ActionLink("Список їжі", "FoodList", "Admin", null, new { @class = "btn btn-block btn-default btn-lg" })
+            @Html.ActionLink("Список заказів", "OrderList", "Admin", null, new { @class = "btn btn-block btn-default btn-lg" })
+    </div>
+    <div class="col-xs-8">
+        @RenderBody()
+    </div>
 </div>
 </body>
 </html>
