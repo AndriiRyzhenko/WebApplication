@@ -1,0 +1,11 @@
+﻿<wpf:ResourceDictionary xml:space="preserve" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:s="clr-namespace:System;assembly=mscorlib" xmlns:ss="urn:shemas-jetbrains-com:settings-storage-xaml" xmlns:wpf="http://schemas.microsoft.com/winfx/2006/xaml/presentation">
+	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=a6bf0796_002D56f3_002D4c98_002Daa5a_002Db9ed9ae0b335/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" IsActive="True" Name="FoodRepositoryTests" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;&#xD;
+  &lt;TestAncestor&gt;&#xD;
+    &lt;TestId&gt;xUnit::862DADF1-6E98-48A3-9FBD-ACB889D7599A::net7.0::UnitTests.Repositories.FoodRepositoryTests&lt;/TestId&gt;&#xD;
+    &lt;TestId&gt;xUnit::862DADF1-6E98-48A3-9FBD-ACB889D7599A::net7.0::UnitTests.Repositories.OrderedFoodRepositoryTests&lt;/TestId&gt;&#xD;
+    &lt;TestId&gt;xUnit::862DADF1-6E98-48A3-9FBD-ACB889D7599A::net7.0::UnitTests.Repositories.OrderRepositoryTests&lt;/TestId&gt;&#xD;
+    &lt;TestId&gt;xUnit::862DADF1-6E98-48A3-9FBD-ACB889D7599A::net7.0::UnitTests.CartTests&lt;/TestId&gt;&#xD;
+    &lt;TestId&gt;xUnit::862DADF1-6E98-48A3-9FBD-ACB889D7599A::net7.0::UnitTests.Controllers.AdminControllerTests&lt;/TestId&gt;&#xD;
+    &lt;TestId&gt;xUnit::862DADF1-6E98-48A3-9FBD-ACB889D7599A::net7.0::UnitTests.Controllers.CartControllerTests&lt;/TestId&gt;&#xD;
+  &lt;/TestAncestor&gt;&#xD;
+&lt;/SessionState&gt;</s:String></wpf:ResourceDictionary>

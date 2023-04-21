@@ -16,7 +16,7 @@ namespace WebApp
             // Add services to the container.
             builder.Services.AddControllersWithViews();
 
-            builder.Services.AddDbContext<DataDbContext>(options =>
+            builder.Services.AddDbContext<IDataDbContext, DataDbContext>(options =>
                 options.UseSqlServer(ConnectionString, b => b.MigrationsAssembly("WebApp")), ServiceLifetime.Scoped);
 
             builder.Services.AddScoped<IFoodRepository, FoodRepository>();

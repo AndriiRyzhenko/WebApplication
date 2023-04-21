@@ -1,13 +1,12 @@
 ﻿using Data.Entities;
-using Data.EntityFramework;
 using Data.Interfaces;
 
 namespace Data.Repositories;
 public class FoodRepository : IFoodRepository
 {
-    private readonly DataDbContext _dbContext;
+    private readonly IDataDbContext _dbContext;
 
-    public FoodRepository(DataDbContext dbContext)
+    public FoodRepository(IDataDbContext dbContext)
     {
         _dbContext = dbContext;
     }

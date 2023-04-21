@@ -1,9 +1,10 @@
 ﻿using Data.Entities;
+using Data.Interfaces;
 using Microsoft.EntityFrameworkCore;
 
 namespace Data.EntityFramework;
 
-public class DataDbContext : DbContext
+public class DataDbContext : DbContext, IDataDbContext
 {
     public DataDbContext(DbContextOptions<DataDbContext> options) : base(options)
     {

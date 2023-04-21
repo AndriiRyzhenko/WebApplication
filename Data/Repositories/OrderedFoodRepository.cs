@@ -1,5 +1,4 @@
 ﻿using Data.Entities;
-using Data.EntityFramework;
 using Data.Interfaces;
 using Microsoft.EntityFrameworkCore;
 
@@ -7,9 +6,9 @@ namespace Data.Repositories
 {
     public class OrderedFoodRepository : IOrderedFoodRepository
     {
-        private readonly DataDbContext _dbContext;
+        private readonly IDataDbContext _dbContext;
 
-        public OrderedFoodRepository(DataDbContext dbContext)
+        public OrderedFoodRepository(IDataDbContext dbContext)
         {
             _dbContext = dbContext;
         }

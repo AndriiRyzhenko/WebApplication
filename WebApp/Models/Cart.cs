@@ -37,8 +37,3 @@ public class Cart
         lineCollection.Clear();
     }
 }
-public class CartLine
-{
-    public Food Food { get; set; }
-    public int Quantity { get; set; }
-}

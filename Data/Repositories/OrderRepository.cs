@@ -1,14 +1,13 @@
 ﻿using Data.Entities;
-using Data.EntityFramework;
 using Data.Interfaces;
 
 namespace Data.Repositories;
 
 public class OrderRepository : IOrderRepository
 {
-    private readonly DataDbContext _dbContext;
+    private readonly IDataDbContext _dbContext;
 
-    public OrderRepository(DataDbContext dbContext)
+    public OrderRepository(IDataDbContext dbContext)
     {
         _dbContext = dbContext;
     }
