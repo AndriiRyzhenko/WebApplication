@@ -1,72 +1,67 @@
 ﻿using Data.Entities;
+using Data.EntityFramework;
 using Data.Interfaces;
 
-namespace Data.Repositories
+namespace Data.Repositories;
+public class FoodRepository : IFoodRepository
 {
-    public class FoodRepository : IFoodRepository
+    private readonly DataDbContext _dbContext;
+
+    public FoodRepository(DataDbContext dbContext)
     {
+        _dbContext = dbContext;
+    }
 
-        private List<Food> FoodList = new List<Food>
+    public IEnumerable<Food> GetFood => _dbContext.Foods;
+
+    public Food Get(Guid foodId) => _dbContext.Foods.Find(foodId);
+
+    public void Save(Food food)
+    {
+        if (food.Id == Guid.Empty)
         {
-            new()
+            food.Id = Guid.NewGuid();
+            _dbContext.Foods.Add(food);
+        }
+        else
+        {
+            var existingFood = _dbContext.Foods.Find(food.Id);
+            if (existingFood != null)
             {
-                Category = "Category1",
-                Description = "Description",
-                Id = Guid.NewGuid(),
-                Name = "Name1",
-                Price = 123
-            },
-            new()
-            {
-                Category = "Category2",
-                Description = "Description",
-                Id = Guid.NewGuid(),
-                Name = "Name2",
-                Price = 123
-            },
-            new()
-            {
-                Category = "Category1",
-                Description = "Description",
-                Id = Guid.NewGuid(),
-                Name = "Name3",
-                Price = 123
-            },
-            new()
-            {
-                Category = "Category2",
-                Description = "Description",
-                Id = Guid.NewGuid(),
-                Name = "Name4",
-                Price = 123
-            },
-            new()
-            {
-                Category = "Category3",
-                Description = "Description",
-                Id = Guid.NewGuid(),
-                Name = "Name5",
-                Price = 123
+                existingFood.Name = food.Name;
+                existingFood.Description = food.Description;
+                existingFood.Category = food.Category;
+                existingFood.Price = food.Price;
             }
-        };
-
-        public IEnumerable<Food> GetFood
-        {
-            get
+            else
             {
-                return FoodList;
+                _dbContext.Foods.Add(food);
             }
         }
+        _dbContext.SaveChanges();
+    }
 
-        public void Save(Food food)
+    public Food Update(Food food)
+    {
+        var existingFood = _dbContext.Foods.Find(food.Id);
+        if (existingFood != null)
         {
-            FoodList.Add(food);
+            existingFood.Name = food.Name;
+            existingFood.Description = food.Description;
+            existingFood.Category = food.Category;
+            existingFood.Price = food.Price;
+            _dbContext.SaveChanges();
         }
+        return existingFood;
+    }
 
-        public Food Update(Food food)
+    public void Delete(Guid foodId)
+    {
+        var food = _dbContext.Foods.Find(foodId);
+        if (food != null)
         {
-            FoodList.Add(food);
-            return food;
+            _dbContext.Foods.Remove(food);
+            _dbContext.SaveChanges();
         }
     }
 }

@@ -9,12 +9,12 @@ public class CartController : Controller
 {
     private const string cartSessionKey = "Cart";
 
-    private IFoodRepository repository;
-    private IOrderProcessor orderProcessor;
-    public CartController(IFoodRepository repository, IOrderProcessor orderProcessor)
+    private readonly IFoodRepository _foodRepository;
+    private readonly IOrderRepository _orderRepository;
+    public CartController(IFoodRepository repository, IOrderRepository orderRepository)
     {
-        this.repository = repository;
-        this.orderProcessor = orderProcessor;
+        _foodRepository = repository;
+        _orderRepository = orderRepository;
     }
     public ViewResult Index(Cart cart, string returnUrl)
     {
@@ -27,7 +27,7 @@ public class CartController : Controller
 
     public RedirectToActionResult AddToCart(Cart cart, Guid id, string returnUrl)
     {
-        Food Food = repository.GetFood
+        Food Food = _foodRepository.GetFood
             .FirstOrDefault(p => p.Id == id);
 
         if (Food != null)
@@ -41,7 +41,7 @@ public class CartController : Controller
 
     public RedirectToActionResult RemoveFromCart(Cart cart, Guid id, string returnUrl)
     {
-        Food Food = repository.GetFood
+        Food Food = _foodRepository.GetFood
             .FirstOrDefault(p => p.Id == id);
 
         if (Food != null)
@@ -71,7 +71,31 @@ public class CartController : Controller
         }
         if (ModelState.IsValid)
         {
-            orderProcessor.ProcessOrder(cart, shippingDetails);
+            var order = new Order
+            {
+                Address = shippingDetails.Address,
+                City = shippingDetails.City,
+                Country = shippingDetails.Country,
+                Email = shippingDetails.Email,
+                FirstName = shippingDetails.FirstName,
+                SecondName = shippingDetails.SecondName,
+            };
+
+            var orderedFood = cart.Lines.Select(x => new OrderedFood
+            {
+                Order = order,
+                //Food = x.Food,
+                FoodId = x.Food.Id,
+                //OrderId = order.Id,
+                Quantity = x.Quantity,
+                Id = Guid.NewGuid()
+            });
+
+            order.OrderedFood = orderedFood.ToArray();
+
+            _orderRepository.Save(order);
+
+            //orderRepository.ProcessOrder(cart, shippingDetails);
             cart.Clear();
             HttpContext.Session.SetObject(cartSessionKey, cart);
             return View("Completed");

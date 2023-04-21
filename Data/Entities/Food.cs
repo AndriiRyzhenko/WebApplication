@@ -16,7 +16,6 @@ namespace Data.Entities
 
         [DataType(DataType.MultilineText)]
         [Required(ErrorMessage = "Будь ласка, введіть опис")]
-
         [Display(Name = "Будь ласка, введіть опис")]
         public string Description { get; set; }
 
